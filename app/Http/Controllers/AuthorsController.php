@@ -27,6 +27,7 @@ class AuthorsController extends Controller
      */
     public function create()
     {
+        $this->authorize('create',Author::class);
         return view('authors.create');
     }
 
@@ -38,6 +39,7 @@ class AuthorsController extends Controller
      */
     public function store(StoreauthorRequest $request)
     {
+        $this->authorize('create',Author::class);
         Author::create($request->all());
         return redirect()->route('authors.index')->with(['message'=>'Author added succesfully']);
     }
@@ -61,6 +63,7 @@ class AuthorsController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update',Author::class);
         $author = Author::findOrFail($id);
         return view('authors.edit',compact('author'))->with(['message'=>'Author Updated successfully']);
     }
@@ -74,6 +77,7 @@ class AuthorsController extends Controller
      */
     public function update(StoreauthorRequest $request, $id)
     {
+        $this->authorize('update', Author::class);
         $author = Author::findOrFail($id);
         $author->update($request->all());
         return redirect()->route('authors.index');
@@ -87,6 +91,7 @@ class AuthorsController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', Author::class);
         $author = Author::findOrFail($id);
         $author->delete();
         return redirect()->route('authors.index')->with(['message'=>'Author Delete successfully']);
@@ -94,6 +99,7 @@ class AuthorsController extends Controller
 
     public function massDestroy(Request $request)
     {
+        $this->authorize('delete',Author::class);
         $authors = explode(',', $request->input('ids'));
         foreach($authors as $author_id)
         {
