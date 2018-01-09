@@ -91,4 +91,16 @@ class AuthorsController extends Controller
         $author->delete();
         return redirect()->route('authors.index')->with(['message'=>'Author Delete successfully']);
     }
+
+    public function massDestroy(Request $request)
+    {
+        $authors = explode(',', $request->input('ids'));
+        foreach($authors as $author_id)
+        {
+            $author = Author::findOrFail($author_id);
+            $author->delete();
+            
+        }
+        return redirect()->route('authors.index')->with(['message' => 'Authors delete succesfully']);
+    }
 }

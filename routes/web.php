@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth', 'prefix'=>'admin'], function(){
+    Route::delete('authors/mass_destroy','AuthorsController@massDestroy')->name('authors.mass_destroy');
     Route::resource('authors','AuthorsController');
     Route::resource('books','BooksController');
 });

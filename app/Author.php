@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Elequent\SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Author extends Model
 {
@@ -13,5 +13,5 @@ class Author extends Model
         'first_name','last_name'
     ];
 
-    protected $dates = ['delete_at'];
+    protected $dates = ['delete'];
 }
